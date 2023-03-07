@@ -4,6 +4,7 @@ use std::os::unix::prelude::OsStringExt;
 use std::path::PathBuf;
 use std::io::{Error, ErrorKind, Result};
 use std::process::{Command, Stdio, Output};
+use std::str::FromStr;
 
 mod with_ext;
 mod boot_ext;
@@ -63,7 +64,7 @@ impl Proton {
            .output()?;
         /// TODO: load file from the proton install dir and give that value.
 
-        Ok(OsString::from_utf8_lossy("TODO"))
+        Ok(OsString::from("lol"))
     }
 
     /// Get wine binary path
