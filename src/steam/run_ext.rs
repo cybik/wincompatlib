@@ -3,7 +3,7 @@ use std::process::{Child, Command};
 
 use super::*;
 
-pub trait ProtonRunExt {
+pub trait SteamRunExt {
     fn run<T: AsRef<OsStr>>(&self, binary: T) -> Result<Child>;
 
     fn run_args<T, S>(&self, args: T) -> Result<Child>
@@ -20,13 +20,13 @@ pub trait ProtonRunExt {
     fn winepath(&self, path: &str) -> Result<PathBuf>;
 }
 
-impl ProtonRunExt for Proton {
+impl SteamRunExt for Steam {
     /// Execute some command using wine
     /// 
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// let process = Proton::default().run("/your/executable");
+    /// let process = Steam::default().run("/your/executable");
     /// ```
     fn run<T: AsRef<OsStr>>(&self, binary: T) -> Result<Child> {
         self.run_args_with_env([binary], [])
@@ -37,7 +37,7 @@ impl ProtonRunExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// let process = Proton::default().run_args(["/your/executable", "--help"]);
+    /// let process = Steam::default().run_args(["/your/executable", "--help"]);
     /// ```
     fn run_args<T, S>(&self, args: T) -> Result<Child>
     where
@@ -52,7 +52,7 @@ impl ProtonRunExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// let process = Proton::default().run_args_with_env(["/your/executable", "--help"], [
+    /// let process = Steam::default().run_args_with_env(["/your/executable", "--help"], [
     ///     ("YOUR", "variable")
     /// ]);
     /// ```
@@ -82,7 +82,7 @@ impl ProtonRunExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// println!("System32 path: {:?}", Proton::default().winepath("C:\\windows\\system32"));
+    /// println!("System32 path: {:?}", Steam::default().winepath("C:\\windows\\system32"));
     /// ```
     fn winepath(&self, path: &str) -> Result<PathBuf> {
         let output = self.run_args(["winepath", "-u", path])?.wait_with_output()?;
