@@ -1,5 +1,5 @@
 pub mod wine;
-pub mod proton;
+pub mod steam;
 
 #[cfg(feature = "dxvk")]
 pub mod dxvk;
@@ -9,7 +9,7 @@ mod test;
 
 pub mod prelude {
     pub use super::wine::*;
-    pub use super::proton::*;
+    pub use super::steam::*;
 
     #[cfg(feature = "dxvk")]
     pub use super::dxvk::*;

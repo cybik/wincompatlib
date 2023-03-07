@@ -2,17 +2,17 @@ use std::path::PathBuf;
 
 use super::*;
 
-pub trait ProtonWithExt {
+pub trait SteamWithExt {
     fn with_prefix<T: Into<PathBuf>>(self, prefix: T) -> Self;
 }
 
-impl ProtonWithExt for Proton {
+impl SteamWithExt for Steam {
     /// Add path to wine prefix
     /// 
     /// ```
     /// use wincompatlib::prelude::*;
     /// 
-    /// let wine = Proton::from_binary("wine")
+    /// let wine = Steam::from_binary("wine")
     ///     .with_prefix("/path/to/prefix");
     /// ```
     fn with_prefix<T: Into<PathBuf>>(self, prefix: T) -> Self {

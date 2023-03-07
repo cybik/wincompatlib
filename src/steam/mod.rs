@@ -10,14 +10,14 @@ mod with_ext;
 mod boot_ext;
 mod run_ext;
 
-pub use with_ext::ProtonWithExt;
-pub use boot_ext::ProtonBootExt;
-pub use run_ext::ProtonRunExt;
+pub use with_ext::SteamWithExt;
+pub use boot_ext::SteamBootExt;
+pub use run_ext::SteamRunExt;
 
 pub use derive_builder::Builder;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Proton {
+pub struct Steam {
     binary: PathBuf,
 
     /// Specifies `WINEPREFIX` variable
@@ -27,15 +27,15 @@ pub struct Proton {
     pub wineboot: Option<PathBuf>
 }
 
-impl Default for Proton {
+impl Default for Steam {
     fn default() -> Self {
         Self::from_binary("proton")
     }
 }
 
-impl Proton {
+impl Steam {
     pub fn new<T: Into<PathBuf>>(binary: T, prefix: Option<T>, wineboot: Option<T>) -> Self {
-        Proton {
+        Steam {
             binary: binary.into(),
             prefix: prefix.map(|value| value.into()),
             wineboot: wineboot.map(|value| value.into())
@@ -51,9 +51,9 @@ impl Proton {
     /// ```
     /// use wincompatlib::prelude::*;
     /// 
-    /// match Proton::default().version() {
-    ///     Ok(version) => println!("Proton version: {:?}", version),
-    ///     Err(err) => eprintln!("Proton is not available: {}", err)
+    /// match Steam::default().version() {
+    ///     Ok(version) => println!("Steam version: {:?}", version),
+    ///     Err(err) => eprintln!("Steam is not available: {}", err)
     /// }
     /// ```
     pub fn version(&self) -> Result<OsString> {
@@ -62,7 +62,7 @@ impl Proton {
            .stdout(Stdio::piped())
            .stderr(Stdio::null())
            .output()?;
-        /// TODO: load file from the proton install dir and give that value.
+        /// TODO: load file from the steam install dir and give that value.
 
         Ok(OsString::from("lol"))
     }
@@ -93,9 +93,9 @@ impl Proton {
     /// 
     /// use std::path::PathBuf;
     /// 
-    /// assert_eq!(Proton::default().wineboot(), PathBuf::from("wineboot"));
-    /// assert_eq!(Proton::from_binary("/wine_build/wine").wineboot(), PathBuf::from("/wine_build/wineboot"));
-    /// assert_eq!(Proton::from_binary("/wine_build_without_wineboot/wine").wineboot(), PathBuf::from("wineboot"));
+    /// assert_eq!(Steam::default().wineboot(), PathBuf::from("wineboot"));
+    /// assert_eq!(Steam::from_binary("/wine_build/wine").wineboot(), PathBuf::from("/wine_build/wineboot"));
+    /// assert_eq!(Steam::from_binary("/wine_build_without_wineboot/wine").wineboot(), PathBuf::from("wineboot"));
     /// ```
     pub fn wineboot(&self) -> PathBuf {
         self.wineboot.clone().unwrap_or_else(|| self.get_inner_binary("wineboot"))
@@ -108,7 +108,7 @@ impl Proton {
     /// 
     /// use std::process::Command;
     /// 
-    /// let wine = Proton::default().with_arch(ProtonArch::Win64);
+    /// let wine = Steam::default().with_arch(SteamArch::Win64);
     /// 
     /// Command::new(wine.binary())
     ///     .envs(wine.get_envs())

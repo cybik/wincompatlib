@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use super::*;
 
-pub trait ProtonBootExt {
+pub trait SteamBootExt {
     fn update_prefix<T: Into<PathBuf>>(&self, path: T) -> Result<Output>;
     fn stop_processes(&self, force: bool) -> Result<Output>;
     fn restart(&self) -> Result<Output>;
@@ -10,13 +10,13 @@ pub trait ProtonBootExt {
     fn end_session(&self) -> Result<Output>;
 }
 
-impl ProtonBootExt for Proton {
+impl SteamBootExt for Steam {
     /// Create (or update existing) wine prefix. Runs `wineboot -u` command
     /// 
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// Proton::default()
+    /// Steam::default()
     ///     .update_prefix("/path/to/prefix")
     ///     .expect("Failed to update prefix");
     /// ```
@@ -36,7 +36,7 @@ impl ProtonBootExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// Proton::default()
+    /// Steam::default()
     ///     .stop_processes(false)
     ///     .expect("Failed to update prefix");
     /// ```
@@ -55,7 +55,7 @@ impl ProtonBootExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// Proton::default()
+    /// Steam::default()
     ///     .with_prefix("/path/to/prefix")
     ///     .restart()
     ///     .expect("Failed to restart");
@@ -75,7 +75,7 @@ impl ProtonBootExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// Proton::default()
+    /// Steam::default()
     ///     .with_prefix("/path/to/prefix")
     ///     .shutdown()
     ///     .expect("Failed to shutdown");
@@ -95,7 +95,7 @@ impl ProtonBootExt for Proton {
     /// ```no_run
     /// use wincompatlib::prelude::*;
     /// 
-    /// Proton::default()
+    /// Steam::default()
     ///     .with_prefix("/path/to/prefix")
     ///     .end_session()
     ///     .expect("Failed to shutdown");
