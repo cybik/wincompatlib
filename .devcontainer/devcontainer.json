@@ -4,10 +4,23 @@
 	"name": "Rust",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/rust:0-1-bullseye",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {},
+		//"ghcr.io/devcontainers/features/desktop-lite:1": {},
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"installOhMyZsh": true,
+			"nonFreePackages": true,
+			"upgradePackages": true
+		},
 		"ghcr.io/devcontainers/features/rust:1": {},
-		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {}
+		"ghcr.io/devcontainers-contrib/features/tmux-apt-get:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"omzPlugins": "git github gitignore python command-not-found dotnet golang tmux"
+		}
 	}
 
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
@@ -18,9 +31,6 @@
 	// 		"type": "volume"
 	// 	}
 	// ]
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
