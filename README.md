@@ -1,6 +1,12 @@
-<h1 align="center">🦀 wincompatlib</h1>
+<h1 align="center">🦀 libaragal</h1>
 
-Rust library that contains a set of interfaces to run windows applications on unix-like systems using Wine
+Rust library that contains a set of formalized interfaces to run applications and games on unix-like systems using either Wine, Proton, or even as Native applications.
+
+## Why though?
+
+This library started as a simple, formalized interface to launch payloads into WINE as simply 
+as possible. It then grew into this interesting mess because the old man on the team had ideas
+of grandeur. As many Canadians do, he ended up apologizing for that.
 
 ## Examples
 
