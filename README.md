@@ -1,6 +1,8 @@
 <h1 align="center">🦀 libaragal</h1>
 
-Rust library that contains a set of formalized interfaces to run applications and games on unix-like systems using either Wine, Proton, or even as Native applications.
+## A Rather Abstracted Game and Application Launcher
+A simple rust library that provides a set of formalized interfaces to run applications and games
+on UNIX-like systems using either WINE, Proton, or even running as Native applications.
 
 ## Why though?
 
